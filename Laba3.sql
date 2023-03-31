@@ -25,7 +25,7 @@ FROM cities
 LIMIT 50
 
 
-SELECT id, name, population, Concat(name, ' - ', ((population*100)/40000000), '%' )
+SELECT id, Concat(name, ' - ', ((population*100)/40000000), '%' )
 FROM cities 
 WHERE ((population*100)/40000000) >= 0.1
 ORDER BY ((population*100)/40000000) DESC
