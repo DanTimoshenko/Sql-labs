@@ -20,14 +20,14 @@ CREATE TABLE `Line_of_metro` (
   `name` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `Line_of_metro` (`id`, `name`) VALUES
+INSERT INTO `line_of_metro` (`id`, `name`) VALUES
 (1,	'green'),
 (2,	'red'),
 (3,	'blue');
 
 DROP TABLE IF EXISTS `station_of_metro`;
 CREATE TABLE `station_of_metro` (
-  `id_of_station` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `name_of_station` char(255) NOT NULL,
   `number_of_line` int(255) NOT NULL,
   `number_of_station_in_line` int(255) NOT NULL
@@ -43,12 +43,10 @@ INSERT INTO `station_of_metro` (`id_of_station`, `name_of_station`, `number_of_l
 
 DROP TABLE IF EXISTS `tranisition_on_line_to_line`;
 CREATE TABLE `tranisition_on_line_to_line` (
-  `from_line` int(255) NOT NULL,
-  `to_line` int(255) NOT NULL,
   `from_station` int(255) NOT NULL,
   `to_station` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `tranisition_on_line_to_line` (`from_line`, `to_line`, `from_station`, `to_station`) VALUES
-(2,	3,	4,	1);
+(4,	1);
 
