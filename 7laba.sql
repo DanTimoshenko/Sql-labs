@@ -7,12 +7,12 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `registration`;
 CREATE TABLE `registration` (
-  `ip` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `nickname` char(255) NOT NULL,
   `email` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `registration` (`ip`, `nickname`, `email`) VALUES
+INSERT INTO `registration` (`id`, `nickname`, `email`) VALUES
 (1,	'Danchick',	'123253263g@gmail.com'),
 (2,	'AndriiSergiovich',	'andrii.khoroshun@khpi.edu.ua');
 
@@ -22,7 +22,7 @@ CREATE TABLE `topic` (
   `topic_of_news` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `topics` (`id`, `topic_of_news`) VALUES
+INSERT INTO `topics` (`id`, `topic`) VALUES
 (1,	'sport'),
 (2,	'nature'),
 (3,	'science');
