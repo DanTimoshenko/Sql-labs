@@ -34,7 +34,7 @@ CREATE TABLE `news` (
   `name` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `news` (`id`, `id_of_news`, `name`) VALUES
+INSERT INTO `news` (`id`, `news_id`, `name`) VALUES
 (1,	1,	'Match of the Year: Daniil Timoshenko vs Vadim Plushnikov'),
 (1,	2,	'Scientists have discovered an immortal animal'),
 (1,	3,	'Physicists have discovered a new property of gravity');
@@ -42,14 +42,14 @@ INSERT INTO `news` (`id`, `id_of_news`, `name`) VALUES
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
   `ip` int(255) NOT NULL,
-  `id_of_news` int(255) NOT NULL,
+  `news_id` int(255) NOT NULL,
   `comment` char(255) NOT NULL,
   `rating_of_news` int(255) NOT NULL,
   KEY `rating_of_news` (`rating_of_news`),
   CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`rating_of_news`) REFERENCES `numbers` (`rating_of_news`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `rating` (`ip`, `id_of_news`, `comment`, `rating_of_news`) VALUES
+INSERT INTO `rating` (`ip`, `news_id`, `comment`, `rating_of_news`) VALUES
 (1,	1,	'I was waiting more from Vadim',	2);
 
 DROP TABLE IF EXISTS `numbers`;
