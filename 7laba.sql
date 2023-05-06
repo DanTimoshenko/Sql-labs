@@ -31,13 +31,14 @@ DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` int(255) NOT NULL,
   `topic_id` int(255) NOT NULL,
-  `name` char(255) NOT NULL
+  `name` char(255) NOT NULL,
+  `content` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `news` (`id`, `news_id`, `name`) VALUES
-(1,	1,	'Match of the Year: Daniil Timoshenko vs Vadim Plushnikov'),
-(1,	2,	'Scientists have discovered an immortal animal'),
-(1,	3,	'Physicists have discovered a new property of gravity');
+INSERT INTO `news` (`id`, `news_id`, `name`, 'content') VALUES
+(1,	1,	'Match of the Year: Daniil Timoshenko vs Vadim Plushnikov', 'content'),
+(1,	2,	'Scientists have discovered an immortal animal', 'content'),
+(1,	3,	'Physicists have discovered a new property of gravity', 'content');
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
