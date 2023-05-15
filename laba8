@@ -45,8 +45,9 @@ CREATE TABLE `project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `project` (`id`, `name`, `author_id`, `file`) VALUES
-(2,	'B',	2,	'-'),
-(1,	'A',	1,	'https/file');
+(1,	'A',	1,	'https/file'),
+(2,	'B',	2,	'-');
+
 
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
