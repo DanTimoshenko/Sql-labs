@@ -5,16 +5,56 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `File`;
+CREATE TABLE `File` (
+  `id` int(255) NOT NULL,
+  `name` char(255) NOT NULL,
+  `reference` char(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `File` (`id`, `name`, `reference`) VALUES
+(1,	'File1',	'https/'),
+(2,	'File2',	'https/1');
+
+DROP TABLE IF EXISTS `project`;
+CREATE TABLE `project` (
+  `id` int(255) NOT NULL,
+  `name` char(255) NOT NULL,
+  `users_id` int(255) NOT NULL,
+  `file_id` char(255) NOT NULL,
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `project` (`id`, `name`, `users_id`, `file_id`) VALUES
+(2,	'B',	2,	'-'),
+(1,	'A',	1,	'https/file');
+
+DROP TABLE IF EXISTS `task`;
+CREATE TABLE `task` (
+  `id` int(255) NOT NULL,
+  `name` char(255) NOT NULL,
+  `users_id` int(255) NOT NULL,
+  `file_id` char(255) NOT NULL,
+  KEY `id` (`id`),
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `task` (`id`, `name`, `users_id`, `file_id`) VALUES
+(1,	'Creat_menu',	1,	'-'),
+(2,	'Create_hero',	4,	'https/file1');
+
 SET NAMES utf8mb4;
 
-DROP TABLE IF EXISTS `author`;
-CREATE TABLE `author` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `id` int(255) NOT NULL,
   `name` char(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `author` (`id`, `name`) VALUES
+INSERT INTO `users` (`id`, `name`) VALUES
 (1,	'Danil'),
 (2,	'Vadim'),
 (3,	'Nikita'),
@@ -22,49 +62,4 @@ INSERT INTO `author` (`id`, `name`) VALUES
 (5,	'Den'),
 (6,	'Anna');
 
-DROP TABLE IF EXISTS `performer`;
-CREATE TABLE `performer` (
-  `id` int(255) unsigned NOT NULL AUTO_INCREMENT,
-  `name` char(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `performer` (`id`, `name`) VALUES
-(1,	'Ban'),
-(2,	'Gan'),
-(3,	'Van');
-
-DROP TABLE IF EXISTS `project`;
-CREATE TABLE `project` (
-  `id` int(255) NOT NULL,
-  `name` char(255) NOT NULL,
-  `author_id` int(255) NOT NULL,
-  `file` char(255) NOT NULL,
-  KEY `author_id` (`author_id`),
-  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `project` (`id`, `name`, `author_id`, `file`) VALUES
-(1,	'A',	1,	'https/file'),
-(2,	'B',	2,	'-');
-
-
-DROP TABLE IF EXISTS `task`;
-CREATE TABLE `task` (
-  `id` char(255) NOT NULL,
-  `name` char(255) NOT NULL,
-  `perfomer_id` int(255) unsigned NOT NULL,
-  `author_id` int(255) NOT NULL,
-  `file` char(255) NOT NULL,
-  KEY `id` (`id`),
-  KEY `perfomer_id` (`perfomer_id`),
-  KEY `author_id` (`author_id`),
-  CONSTRAINT `task_ibfk_2` FOREIGN KEY (`perfomer_id`) REFERENCES `performer` (`id`),
-  CONSTRAINT `task_ibfk_3` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `task` (`id`, `name`, `perfomer_id`, `author_id`, `file`) VALUES
-('1',	'Creat_menu',	2,	1,	'-'),
-('2',	'Create_hero',	1,	4,	'https/file1');
-
--- 2023-05-15 20:14:24
+-- 2023-05-19 07:57:07
