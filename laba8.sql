@@ -8,30 +8,31 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 DROP TABLE IF EXISTS `files`;
 CREATE TABLE `files` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `Name` char(255) DEFAULT NULL,
+  `name` char(255) DEFAULT NULL,
   `link` char(255) NOT NULL,
+  'project_id' int(10) DEFAULT NULL,
+  'task_id' int(10) DEFAULT NULL,
+   CONSTRAINT `project_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+   CONSTRAINT `project_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `files` (`id`, `Name`, `link`) VALUES
-(1,	'Name1',	'https/1'),
-(2,	'Name2',	'https/2');
+INSERT INTO `files` (`id`, `Name`, `project_id`, `task_id`,`link`) VALUES
+(1,	'Name1',	'NULL', '1', 'https/1'),
+(2,	'Name2',	'1', 'NULL', 'https/2');
 
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` int(10) NOT NULL,
   `name` char(255) NOT NULL,
-  `file_id` int(10) NOT NULL,
   `author_id` int(10) NOT NULL,
-  KEY `file_id` (`file_id`),
   KEY `author_id` (`author_id`),
-  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`),
   CONSTRAINT `project_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `project` (`id`, `name`, `file_id`, `author_id`) VALUES
-(1,	'A',	1,	2),
-(2,	'B',	2,	1);
+INSERT INTO `project` (`id`, `name`, `author_id`) VALUES
+(1,	'A',  2),
+(2,	'B',	1);
 
 DROP TABLE IF EXISTS `project_users`;
 CREATE TABLE `project_users` (
@@ -48,18 +49,15 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `id` int(255) NOT NULL,
   `name` char(255) NOT NULL,
-  `file_id` int(10) NOT NULL,
   `author_id` int(10) NOT NULL,
   KEY `id` (`id`),
   KEY `author_id` (`author_id`),
-  KEY `file_id` (`file_id`),
-  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `task_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`)
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `task` (`id`, `name`, `file_id`, `author_id`) VALUES
-(1,	'Creat_menu',	1,	1),
-(2,	'Create_hero',	2,	2);
+INSERT INTO `task` (`id`, `name`, `author_id`) VALUES
+(1,	'Creat_menu',	1),
+(2,	'Create_hero',	2);
 
 DROP TABLE IF EXISTS `task_users`;
 CREATE TABLE `task_users` (
